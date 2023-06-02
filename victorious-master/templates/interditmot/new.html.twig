@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Interditmot{% endblock %}
+
+{% block body %}
+    <h1>Create new Interditmot</h1>
+
+    {{ include('interditmot/_form.html.twig') }}
+
+    <a href="{{ path('app_interditmot_index') }}">back to list</a>
+{% endblock %}

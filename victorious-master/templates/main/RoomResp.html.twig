@@ -1,0 +1,339 @@
+{% extends "base.html copy.twig" %}
+
+{% block body %}
+    <!--
+        Additional Classes:
+            .nk-header-opaque
+    -->
+
+
+
+
+
+    <div class="nk-main">
+
+        <div class="nk-gap-2"></div>
+
+
+        <div  data-autoplay="8000">
+
+            <video  id="background-video" autoplay loop muted poster="assets\images\Banner.mp4">
+                <source src="assets\images\Banner.mp4" type="video/mp4">
+            </video>
+
+        </div>
+    </div>
+    <div class="container" id="idDivContainer">
+        <div style="text-align: center;" ><h3 id="NomTournament"> </h3> </div>
+        <table class="table">
+            <tbody>
+            <tr id="tr1" style="height: 100% ; width:max-content " >
+                <td id="tr1td1" style="height: max-content;width: 50%">
+
+                    <h3><a href="#" onclick="clickPlay(this)">In Play </a></h3><br><br><br>
+                    <h3><a href="#" onclick="clickChat(this)">Chat </a></h3><br><br><br>
+
+
+
+
+                </td>
+                <td id="tr1td2" style="height: max-content;width: 50%">
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="nk-gap-4"></div>
+
+
+
+
+
+
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-top" src="assets/images/bg-top.png" alt="">
+    <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+
+    <!-- END: Page Background -->
+
+
+
+
+
+
+
+
+    <script>
+
+    </script>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        var footer = document.querySelector("#idFooter");
+        footer.innerHTML = "" ;
+        footer.remove();
+        document.querySelector("#NomTournament").innerHTML = "vous etes dans Tournament ==> " + localStorage.getItem("Tournament");
+
+
+
+
+        //var ws = new WebSocket('ws://localhost:8080' );
+         var ws = new WebSocket('ws://192.168.1.8:8080');
+
+        ws.onclose = function () {
+            _receiver.innerHTML = 'Connection closed';
+        };
+
+        ws.onerror = function () {
+            _receiver.innerHTML = 'An error occured!';
+        };
+
+        ws.onmessage = function (event) {
+            var divChatMennu = document.querySelector("#divChatMennu");
+            if(JSON.parse(event.data)['Function'] == 'ChatFromServeur'){
+                divChatMennu.innerHTML += "<label  style='background-color: #93a1a1;width: 180px;height: 40px; border-radius: 30px;text-align: center'>"+
+                    JSON.parse(event.data)['message']+
+                    "</label>";
+
+                divChatMennu.innerHTML += "<br>"
+
+
+
+            }
+            else if(JSON.parse(event.data)['Function'] == 'ChatFromServeurMe'){
+                divChatMennu.innerHTML += "<label  style='background-color: #0b97c4;width: 180px;height: 40px; border-radius: 30px;text-align: center;margin-left: 140px;'>"+
+                    JSON.parse(event.data)['message']+
+                    "</label>";
+
+
+                divChatMennu.innerHTML += "<br>"
+
+            }
+            else if(JSON.parse(event.data)['Function'] == 'InvalideMessage'){
+                alert("faite attention mot interdit");
+            }
+
+            else if((JSON.parse(event.data)['Function'] == 'PlayMe') ||(JSON.parse(event.data)['Function'] == 'PlayNotMe')){
+                labelPlayer1 = document.querySelector("#idLabelPlayer1");
+                labelPlayer2 = document.querySelector("#idLabelPlayer2");
+
+                if(labelPlayer1.value == null){
+                    labelPlayer1.innerHTML = JSON.parse(event.data)['NamePlayer'];
+                    labelPlayer1.value = JSON.parse(event.data)['NamePlayer'];
+
+
+                }
+                else if(labelPlayer2.value == null){
+                    labelPlayer2.innerHTML = JSON.parse(event.data)['NamePlayer'];
+                    labelPlayer2.value = JSON.parse(event.data)['NamePlayer'];
+                }
+
+            }
+            else if(JSON.parse(event.data)['Function'] == 'WinnerPlayer'){
+                document.querySelector("#idLabelWinner").innerHTML = JSON.parse(event.data)['WinnerName'];
+                document.querySelector("#idLabelWinner").value = JSON.parse(event.data)['WinnerName'];
+                document.querySelector("#idLabelWinner").style.backgroundColor = 'green';
+
+                if(document.querySelector("#idLabelPlayer1").value == JSON.parse(event.data)['WinnerName'] ){
+                    document.querySelector("#idLabelPlayer1").style.backgroundColor = 'green';
+                    document.querySelector("#idLabelPlayer2").style.backgroundColor = 'red';
+                }
+                else if(document.querySelector("#idLabelPlayer2").value == JSON.parse(event.data)['WinnerName'])
+                {
+                    document.querySelector("#idLabelPlayer2").style.backgroundColor = 'green';
+                    document.querySelector("#idLabelPlayer1").style.backgroundColor = 'red';
+                }
+
+            }
+
+
+
+
+
+
+        };
+        ws.onopen = function () {
+            console.log("tao thalet connexion");
+            alert("connection WebSocket Valide");
+        };
+
+
+
+        function clickChat(){
+            _receiver = document.querySelector("#tr1td2");
+            $.ajax({
+                method: "GET",
+                url: "{{ path('RoomMennuIndex') }}",
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+                    _receiver.innerHTML = Response;
+                }
+            });
+
+
+            console.log("nzelet aala chat");
+            protocoleWhoIam = {
+                "Function" : "NewUser",
+                "Tournament" : localStorage.getItem("Tournament"),
+                "idUser" : localStorage.getItem("Id"),
+                "IsResp" : "yes"
+            }
+            ws.send(JSON.stringify(protocoleWhoIam));
+
+
+
+
+
+
+        }
+
+        function clickPlay(){
+            _receiver = document.querySelector("#tr1td2")
+            console.log("nzelet aala play");
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('BracetIndex') }}",
+                data: {nameTournament : localStorage.getItem("Tournament")},
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+                    _receiver.innerHTML = Response;
+                }
+            });
+
+
+
+
+        }
+
+        function clickWatch(){
+            _receiver = document.querySelector("#tr1td2")
+            console.log("nzelet aala watch");
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('WatchIndex') }}",
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+                    _receiver.innerHTML = Response;
+                }
+            });
+
+
+
+
+
+        }
+
+        function clickBtnChat(){
+            var inputChat = document.querySelector("#inputChat")
+
+            console.log(inputChat.value);
+
+            protocoleWhoIam = {
+                "Function" : "Chat",
+                "Message" : inputChat.value,
+                "From" : localStorage.getItem("Id")
+            }
+            ws.send(JSON.stringify(protocoleWhoIam));
+            inputChat.value = "";
+        }
+
+        function btnVideo(){
+            console.log("nzelet aala video");
+            navigator.getUserMedia = ( navigator.getUserMedia       ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia    ||
+                navigator.msGetUserMedia );
+            if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+                const constraints = {
+                    video: {
+                        width: {
+                            min: 1280,
+                            ideal: 1920,
+                            max: 2560,
+                        },
+                        height: {
+                            min: 720,
+                            ideal: 1080,
+                            max: 1440,
+                        },
+                    },
+                }
+                const video = document.querySelector('#video')
+                const videoStream = navigator.mediaDevices.getUserMedia(constraints);
+
+                video.srcObject = videoStream
+            }
+
+
+        }
+
+        function btnClickPlayActive(){
+            if((document.querySelector("#idLabelPlayer1").value == null) ||(document.querySelector("#idLabelPlayer2").value == null)){
+                alert("veuillez attendre les autres joueurs");
+            }
+            else {
+                var valeur = prompt("veuillez choisir le joueurs gagné \n 1 ---> joueur 1 \n 2 ----> joueur 2");
+                console.log(valeur);
+
+                if(valeur == "1"){
+                    protocoleWhoIam = {
+                        "Function" : "WinnerPlayer",
+                        "WinnerName" : document.querySelector("#idLabelPlayer1").value,
+                        "Tournament" :localStorage.Tournament
+                    }
+                    ws.send(JSON.stringify(protocoleWhoIam));
+
+                }
+                else if (valeur == "2"){
+                    protocoleWhoIam = {
+                        "Function" : "WinnerPlayer",
+                        "WinnerName" : document.querySelector("#idLabelPlayer2").value,
+                        "Tournament" :localStorage.Tournament
+                    }
+                    ws.send(JSON.stringify(protocoleWhoIam));
+
+                }
+                else {
+                    alert("Invalide choix joueurs");
+                }
+
+            }
+
+
+        }
+
+        function btnClickEmail(val){
+
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('email') }}",
+                data: {nameWinner : document.querySelector("#idLabelWinner").value},
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+
+                }
+            });
+
+
+
+
+        }
+
+
+
+    </script>
+
+{% endblock %}
+

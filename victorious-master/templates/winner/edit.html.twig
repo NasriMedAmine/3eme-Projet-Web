@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Winner{% endblock %}
+
+{% block body %}
+    <h1>Edit Winner</h1>
+
+    {{ include('winner/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_winner_index') }}">back to list</a>
+
+    {{ include('winner/_delete_form.html.twig') }}
+{% endblock %}

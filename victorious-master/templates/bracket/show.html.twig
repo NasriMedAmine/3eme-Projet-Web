@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bracket{% endblock %}
+
+{% block body %}
+    <h1>Bracket</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>TeamName</th>
+                <td>{{ bracket.teamName }}</td>
+            </tr>
+            <tr>
+                <th>Team</th>
+                <td>{{ bracket.team }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ bracket.date ? bracket.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bracket_index') }}">back to list</a>
+
+    <a href="{{ path('app_bracket_edit', {'idBracket': bracket.idBracket}) }}">edit</a>
+
+    {{ include('bracket/_delete_form.html.twig') }}
+{% endblock %}

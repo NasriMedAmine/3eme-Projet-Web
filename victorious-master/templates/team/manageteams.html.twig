@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block contenpage %}
+    <h1>Admin index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdAdmin</th>
+                <th>Pseudo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for admin in teams %}
+            <tr>
+                <td>{{ admin.nbPlayers }}</td>
+                <td>{{ admin.teamName }}</td>
+                <td>
+                   
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_new') }}">Create new</a>
+{% endblock %}

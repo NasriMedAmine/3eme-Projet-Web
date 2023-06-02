@@ -1,0 +1,43 @@
+{% extends "admin/bars.html.twig" %}
+
+{%  block contenpage %}
+
+
+    <h1>Games index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdGame</th>
+                <th>GameName</th>
+                <th>Description</th>
+                <th>News</th>
+                <th>NewsDate</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.idGame }}</td>
+                <td>{{ game.gameName }}</td>
+                <td>{{ game.description }}</td>
+                <td>{{ game.news }}</td>
+                <td>{{ game.newsDate ? game.newsDate|date('Y-m-d') : '' }}</td>
+                <td><img src="/uploads/images/games/{{ game.image }}" style="width:200px;height:100px;"></td>
+                <td>
+                    <a href="{{ path('app_games_delete', {'idGame': game.idGame}) }}">delete</a>
+                    <a href="{{ path('app_games_edit', {'idGame': game.idGame}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_games_new') }}">Create new</a>
+{% endblock %}

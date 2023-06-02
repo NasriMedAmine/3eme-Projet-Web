@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{{ "backend.global.welcome"|trans }}{% endblock %}</title>
+        {% block metas %}
+            <meta charset="UTF-8">
+        {% endblock %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css"
+              integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+        {% block stylesheets %} {% endblock %}
+
+
+    </head>
+    <body {% block bodyclass %}class="" {% endblock %}>
+
+        {% block impersionate %}
+            {% if is_granted('IS_IMPERSONATOR') %}
+            <div class="alert alert-warning" style="margin-bottom: 0;">
+                {{ "backend.global.you_are_logged"|trans }} : {{ app.user.username }}
+                <a href="{{ path('app_admin_index',{'_switch_user':'_exit'}) }}">{{ "backend.global.leave_impersonate"|trans }}</a>
+            </div>
+            {% endif %}
+        {% endblock %}
+        {% block body %}{% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"
+                integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

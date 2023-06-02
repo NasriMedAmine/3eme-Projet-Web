@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Team{% endblock %}
+
+{% block body %}
+    <h1>Team</h1>
+    <form method="post" action="{{path('recherche')}}">
+        <label for="">Recherche</label>
+        <input type="text" name="search"><input type="submit" value="recherche">
+    </form>
+
+    <table class="table">
+        <tbody>
+          <tr>
+           <th>Team Name</th>
+           <th>Players</th>
+           <th>Nb_Players</th>
+           <th>Password</th>
+            <th>Delete</th>
+             <th>Update</th>
+       </tr>
+       <tr{% for c in team %}>
+           <td>{{c.teamName}}</td>
+      
+       <td>{{c.players}}</td>
+       <td>{{c.nbPlayers}}</td>
+       <td>{{c.password}}</td>
+       <td><a href="{{ path('app_team_edit',{'idTeam':c.idTeam})}}">Update</a></td>
+       <td><a href="{{ path('app_team_delete',{'idTeam':c.idTeam })}}">Delete</a></td>
+
+       </tr {%endfor%}>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_team_index') }}">back to list</a>
+
+ 
+
+  
+    
+{% endblock %}

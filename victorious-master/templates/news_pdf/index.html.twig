@@ -1,0 +1,26 @@
+<table class="table" border="1">
+    <thead>
+    <tr>
+        <th>IdNews</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>DateDebut</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for news in news %}
+        <tr>
+            <td>{{ news.idNews }}</td>
+            <td>{{ news.title }}</td>
+            <td>{{ news.description }}</td>
+            <td>{{ news.dateDebut ? news.dateDebut|date('Y-m-d') : '' }}</td>
+            <td><img src="/uploads/images/news/{{ news.image }}"></td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

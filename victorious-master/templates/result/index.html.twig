@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Result index{% endblock %}
+
+{% block body %}
+    <h1>Result index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdResult</th>
+                <th>WinTeams</th>
+                <th>LoseTeams</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.idResult }}</td>
+                <td>{{ result.winTeams }}</td>
+                <td>{{ result.loseTeams }}</td>
+                <td>
+                    <a href="{{ path('app_result_show', {'idResult': result.idResult}) }}">show</a>
+                    <a href="{{ path('app_result_edit', {'idResult': result.idResult}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_result_new') }}">Create new</a>
+{% endblock %}

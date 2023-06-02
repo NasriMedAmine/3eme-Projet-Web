@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Result{% endblock %}
+
+{% block body %}
+    <h1>Result</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdResult</th>
+                <td>{{ result.idResult }}</td>
+            </tr>
+            <tr>
+                <th>WinTeams</th>
+                <td>{{ result.winTeams }}</td>
+            </tr>
+            <tr>
+                <th>LoseTeams</th>
+                <td>{{ result.loseTeams }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_result_index') }}">back to list</a>
+
+    <a href="{{ path('app_result_edit', {'idResult': result.idResult}) }}">edit</a>
+
+    {{ include('result/_delete_form.html.twig') }}
+{% endblock %}

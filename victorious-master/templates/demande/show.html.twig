@@ -1,0 +1,47 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+
+{% block contenpage %}
+    <h1>Demande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Iddemande</th>
+                <td>{{ demande.iddemande }}</td>
+            </tr>
+            <tr>
+                <th>Nomsociete</th>
+                <td>{{ demande.nomsociete }}</td>
+            </tr>
+            <tr>
+                <th>Adressesociete</th>
+                <td>{{ demande.adressesociete }}</td>
+            </tr>
+            <tr>
+                <th>Codetva</th>
+                <td>{{ demande.codetva }}</td>
+            </tr>
+            <tr>
+                <th>Typedemandeur</th>
+                <td>{{ demande.typedemandeur }}</td>
+            </tr>
+            <tr>
+                <th>Valide</th>
+                <td>{{ demande.valide ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_demande_index') }}">back to list</a>
+
+    <a href="#">edit</a>
+
+    {{ include('demande/_delete_form.html.twig') }}
+{% endblock %}

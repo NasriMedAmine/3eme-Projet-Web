@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Society index{% endblock %}
+
+{% block body %}
+    <h1>Society index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdSociety</th>
+                <th>Name</th>
+                <th>RegistrationNumber</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for society in societies %}
+            <tr>
+                <td>{{ society.idSociety }}</td>
+                <td>{{ society.name }}</td>
+                <td>{{ society.registrationNumber }}</td>
+                <td>
+                    <a href="{{ path('app_society_show', {'idSociety': society.idSociety}) }}">show</a>
+                    <a href="{{ path('app_society_edit', {'idSociety': society.idSociety}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_society_new') }}">Create new</a>
+{% endblock %}

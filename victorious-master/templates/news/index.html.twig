@@ -1,0 +1,55 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block title %}News index{% endblock %}
+
+
+{%  block contenpage %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <h1>News index</h1>
+    <input id="myInput" type="text" placeholder="Search.." class="form-control">
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>IdNews</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>DateDebut</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news in news %}
+            <tr>
+                <td>{{ news.idNews }}</td>
+                <td>{{ news.title }}</td>
+                <td>{{ news.description }}</td>
+                <td>{{ news.dateDebut ? news.dateDebut|date('Y-m-d') : '' }}</td>
+                <td><img src="/uploads/images/news/{{ news.image }}" style="width:200px;height:100px;"></td>
+
+                <td>
+                    <a href="{{ path('app_news_delete', {'idNews': news.idNews}) }}">delete</a>
+                    <a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ path('app_news_new') }}">Create new</a>
+    <a href="{{ path('app_news_pdf') }}">Imprimer</a>
+{% endblock %}

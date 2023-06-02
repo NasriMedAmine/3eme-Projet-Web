@@ -1,0 +1,76 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+
+{% block contenpage %}
+    <h1>Gerer Demande</h1>
+
+    <h2>Search demande!</h2>
+
+    <input id="myInput" type="text" placeholder="Search.." class="form-control">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+
+"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+    <table id="myTable"  class="table">
+        <thead>
+            <tr>
+                <th>Iddemande</th>
+                <th>Nomsociete</th>
+                <th>Adressesociete</th>
+                <th>Codetva</th>
+                <th>Typedemandeur</th>
+                <th>Valide</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                <td>{{ demande.iddemande }}</td>
+                <td>{{ demande.nomsociete }}</td>
+                <td>{{ demande.adressesociete }}</td>
+                <td>{{ demande.codetva }}</td>
+                <td>{{ demande.typedemandeur }}</td>
+                <td>{{ demande.valide ? '1' : '0' }}</td>
+                <td>
+              {#      <a href="{{ path('app_demande_show', {'iddemande': demande.iddemande}) }}">show</a>
+                    <a href="{{ path('app_demande_edit', {'iddemande': demande.iddemande}) }}">edit</a>
+
+
+              #}
+                    {% if demande.Valide=='0' %}
+                        <a class="btn btn-danger" href="{{ path('accepte', {'iddemande': demande.iddemande}) }}">Valider</a>
+
+                    {% else %}
+                        <a class="btn btn-warning" href="">demande valider</a>
+                    {% endif %}
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

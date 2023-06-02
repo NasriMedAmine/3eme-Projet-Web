@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PubliciteAimer index{% endblock %}
+
+{% block body %}
+    <h1>PubliciteAimer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPubAimer</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publicite_aimer in publicite_aimers %}
+            <tr>
+                <td>{{ publicite_aimer.idPubAimer }}</td>
+                <td>{{ publicite_aimer.date ? publicite_aimer.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_publicite_aimer_show', {'idPubAimer': publicite_aimer.idPubAimer}) }}">show</a>
+                    <a href="{{ path('app_publicite_aimer_edit', {'idPubAimer': publicite_aimer.idPubAimer}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_publicite_aimer_new') }}">Create new</a>
+{% endblock %}

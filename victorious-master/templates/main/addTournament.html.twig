@@ -1,0 +1,41 @@
+<label for="name">
+    name tournament
+</label>
+<input type="text" id="inputname"><br><br>
+
+<label for="name">
+    name game
+</label>
+<select name="games" id="games">
+    <option value="">--Please choose games--</option>
+    {% for game in games %}
+
+        <option value="{{ game.name }}">{{ game.name }}</option>
+    {% endfor %}
+</select><br><br>
+
+<label for="type">
+    type
+</label>
+<select name="type" id="type">
+    <option value="">--Please choose games--</option>
+    <option value="2">2 </option>
+    <option value="4">4 </option>
+
+</select><br><br>
+
+<label for="name">
+    code tournament
+</label>
+<input type="text" id="code"><br><br><br><br><br>
+
+<div style="text-align: center;">
+    <button id="btnAddTournament" onclick="clickAddTournamentNew(this)" style="width: 100px">
+        Add
+    </button>
+</div>
+
+
+
+
+

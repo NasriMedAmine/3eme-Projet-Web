@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+    <h1>News</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdNews</th>
+                <td>{{ news.idNews }}</td>
+            </tr>
+            <tr>
+                <th>DateDebut</th>
+                <td>{{ news.dateDebut ? news.dateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ news.dateFin ? news.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_news_index') }}">back to list</a>
+
+    <a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}">edit</a>
+
+    {{ include('news/_delete_form.html.twig') }}
+{% endblock %}

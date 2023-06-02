@@ -1,0 +1,332 @@
+{% extends "base.html copy.twig" %}
+
+{% block body %}
+    <!--
+        Additional Classes:
+            .nk-header-opaque
+    -->
+
+
+
+
+
+    <div class="nk-main">
+
+        <div class="nk-gap-2"></div>
+
+
+        <div  data-autoplay="8000">
+
+            <video  id="background-video" autoplay loop muted poster="assets\images\Banner.mp4">
+                <source src="assets\images\Banner.mp4" type="video/mp4">
+            </video>
+
+        </div>
+    </div>
+    <div class="container" id="idDivContainer">
+        <table class="table">
+        <tbody>
+        <tr id="tr1" style="height: 100% ; width:max-content " >
+            <td id="tr1td1" style="height: max-content;width: 50%">
+
+                <label for="tournament">add tournament:</label><br>
+
+                <select name="tournaments" id="tournaments">
+                    <option value="">--Please choose tournament--</option>
+                    {% for tournament in tournaments %}
+
+                        <option value="{{ tournament.tournamentName }}">{{ tournament.tournamentName }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+
+                <label for="codeTournament">add code Tournament</label><br>
+                <input type="text" required id="codeTournament" name="code"><br><br><br>
+
+                <button id="buttonShowTournament" onclick="clickBtnShow(this)">Go</button>
+
+
+                <br><br><br><br><br><br><br><br><br>
+
+                <input type="text" placeholder="Name Tournament ..." onkeyup="onClick(this)" id="Onclick"><br><br>
+                <label for="codeTournament">add code Tournament</label><br>
+                <input type="text" required id="codeTournamentRecherche" name="code"><br>
+
+                <br><br>
+                <div id="idDivOnClick"></div>
+
+
+
+
+            </td>
+            <td id="tr1td2" style="height: max-content;width: 50%">
+
+            </td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
+
+    <div class="nk-gap-4"></div>
+
+
+
+
+
+
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-top" src="assets/images/bg-top.png" alt="">
+    <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+
+    <!-- END: Page Background -->
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+
+        var footer = document.querySelector("#idFooter");
+        footer.innerHTML = "";
+
+        function clickBtnShow(){
+
+
+
+            console.log("nzelet saye");
+
+            var valueTournament = document.querySelector("#tournaments");
+            var codeTournament = document.querySelector("#codeTournament");
+            console.log(valueTournament.value);
+            console.log(codeTournament.value);
+            var data = "4:"+valueTournament.value+codeTournament.value;
+            console.log(data);
+
+
+
+
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('addShow') }}",
+                data: {idUser: localStorage.Id ,nameTournament:valueTournament.value ,codeTournament:codeTournament.value },
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+
+                    var tr1Td2 = document.querySelector("#tr1td2");
+                    localStorage.setItem("Tournament",valueTournament.value);
+                    tr1Td2.innerHTML = Response;
+
+
+
+                }
+            });
+
+
+
+        }
+
+        function onClick(val){
+            var valueTournament = document.querySelector("#Onclick");
+            console.log(valueTournament.value);
+
+
+            if(valueTournament.value == ""){
+                idDivOnClick = document.querySelector("#idDivOnClick");
+                idDivOnClick.innerHTML = "";
+
+            }
+            else{
+                $.ajax({
+                    method: "GET",
+                    url: "{{ path('OnClick') }}",
+                    data: {id: valueTournament.value },
+                    success: function(Response){
+                        console.log("saye aamalt requete ajax w jeni response");
+                        console.log(Response);
+
+                        idDivOnClick = document.querySelector("#idDivOnClick");
+                        idDivOnClick.innerHTML = Response;
+
+
+
+
+
+                    }
+                });
+            }
+
+
+
+
+        }
+        function clickTournamentAfter(val){
+            var codeTournament = document.querySelector("#codeTournamentRecherche");
+            console.log("nzelet saye");
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('addShow') }}",
+                data: {idUser: localStorage.Id ,nameTournament:val.id ,codeTournament:codeTournament.value },
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+
+                    var tr1Td2 = document.querySelector("#tr1td2");
+                    localStorage.setItem("Tournament",val.id);
+                    tr1Td2.innerHTML = Response;
+
+
+
+                }
+            });
+
+        }
+
+
+    </script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

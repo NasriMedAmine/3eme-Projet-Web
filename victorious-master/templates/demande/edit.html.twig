@@ -1,0 +1,18 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+
+{% block contenpage %}
+    <h1>Edit Demande</h1>
+
+    {{ include('demande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_demande_index') }}">back to list</a>
+
+    {{ include('demande/_delete_form.html.twig') }}
+{% endblock %}

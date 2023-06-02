@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Winner{% endblock %}
+
+{% block body %}
+    <h1>Winner</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ winner.id }}</td>
+            </tr>
+            <tr>
+                <th>NameTournament</th>
+                <td>{{ winner.nameTournament }}</td>
+            </tr>
+            <tr>
+                <th>NameWinner</th>
+                <td>{{ winner.nameWinner }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_winner_index') }}">back to list</a>
+
+    <a href="{{ path('app_winner_edit', {'id': winner.id}) }}">edit</a>
+
+    {{ include('winner/_delete_form.html.twig') }}
+{% endblock %}

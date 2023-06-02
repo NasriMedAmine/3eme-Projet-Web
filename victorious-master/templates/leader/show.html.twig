@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leader{% endblock %}
+
+{% block body %}
+    <h1>Leader</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdLeader</th>
+                <td>{{ leader.idLeader }}</td>
+            </tr>
+            <tr>
+                <th>Level</th>
+                <td>{{ leader.level }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ leader.pseudo }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ leader.password }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ leader.mail }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_leader_index') }}">back to list</a>
+
+    <a href="{{ path('app_leader_edit', {'id': leader.idLeader}) }}">edit</a>
+
+    {{ include('leader/_delete_form.html.twig') }}
+{% endblock %}

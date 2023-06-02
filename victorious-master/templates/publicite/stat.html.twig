@@ -1,0 +1,152 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+{% block title %}stat {% endblock %}
+
+{% block contenpage %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawTitleSubtitle);
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart1);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['entreprise', 'Gain '],
+                {% for e in pub %}
+                ['{{ e.nomProprietaire }}',{{ e.prix}}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                title: 'les Marché par entreprise'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+
+        function drawTitleSubtitle() {
+            var data = google.visualization.arrayToDataTable([
+                ['entreprise', 'Gain '],
+                {% for e in pub %}
+                ['{{ e.nomProprietaire }}',{{ e.prix}}],
+                {% endfor %}
+            ]);
+
+            var materialOptions = {
+                chart: {
+                    title: ' Les Gain sur entreprise',
+
+                },
+                hAxis: {
+                    title: 'Total',
+                    minValue: 0,
+                },
+                vAxis: {
+                    title: 'liste entreprise'
+                },
+                bars: 'horizontal'
+            };
+            var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+            materialChart.draw(data, materialOptions);
+        }
+        function drawChart1() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+
+                ['2',5],
+
+            ]);
+
+            var options = {
+                title: 'Gain ',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+        }
+    </script>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div id="chart_div"></div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+    <section class="content" style="width: 700px;">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <h1>hello</h1>
+                                    <div id="piechart" style="width: 600px; height: 500px;"></div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+    <section class="content" style="width: 900px; position: absolute; margin-top: -612px; margin-left: 750px;">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <h1>hello</h1>
+                                    <div id="piechart_3d" style="width: 800px; height: 500px;"></div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+{% endblock %}

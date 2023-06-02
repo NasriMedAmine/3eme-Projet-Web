@@ -1,0 +1,94 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+
+<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+     <!-- Flashy depends on jQuery -->
+     <script src="//code.jquery.com/jquery.js"></script>
+     <!-- Load Flashy default JavaScript -->
+     <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+            src="assets/vendor/jquery/dist/jquery.min.js"
+   
+    </script>
+ <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+{% endblock %}
+
+{% block contenpage %}
+
+
+    <h1>Notification</h1>
+
+    <h2>Search !</h2>
+
+
+
+    <div class="input-group custom-search-form">
+<form action="{{ path('rechercheback' )}}" method="post">
+        <input type="text" name="searchback" class="form-control" placeholder="Search here">
+        <input type="submit"  class="form-control" placeholder="Search here" href="{{ path('rechercheback' )}}">
+</form>
+    </div>
+    <!-- /input-group -->
+
+    <div id="all">
+
+    </div>
+
+
+    <ul class="nav navbar-right panel_toolbox">
+        <li>
+            <a href="{{ path('app_back_new') }}" class="btn btn-success">NEW</a>
+        </li>
+    </ul>
+
+    <table id="example" class="display table table-striped table-bordered dataminetables">
+        <thead>
+            <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+        <tr>
+
+
+            <th>Id</th>
+            <th>Player Name</th>
+            <th>Team Name</th>
+            
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+             <!-- Flashy depends on jQuery -->
+       <!-- Flashy depends on jQuery -->
+       <script src="//code.jquery.com/jquery.js"></script>
+       <!-- Load Flashy default JavaScript -->
+       <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+       <!-- Include Flashy default partial -->
+       {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+        {% for n in notification %}
+
+            <tr>
+                <td><br> <br> <br> <center> <p>{{ n.id }}</p></center></td>
+                <td><br> <br> <br> <center>  <p>{{ n.player_name }}</p></center></td>
+
+                </td>
+                <td><br> <br> <br> <center> <p>{{ n.team_name }}</p></center></td>
+                <td><a href="{{ path('app_not_edit',{'team_name':n.team_name,'id':n.id })}}">Approve</a></td>
+                <td><a href="{{ path('app_not_delete',{'id':n.id })}}">denied</a></td>
+             
+                
+                <iframe id="invisible" style="display:none;"></iframe>
+            
+                
+                
+
+
+            </tr>
+
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+<h5>  {{ knp_pagination_render(notification) }}</h5>
+{% endblock %}

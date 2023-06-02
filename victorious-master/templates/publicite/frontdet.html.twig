@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}frontgeneral {% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+
+
+
+    <div class="nk-main">
+
+        <!-- START: Breadcrumbs -->
+        <div class="nk-gap-1"></div>
+        <div class="container">
+            <ul class="nk-breadcrumbs">
+
+
+                <li><a href="{{ path('main') }}">Home</a></li>
+
+
+                <li><span class="fa fa-angle-right"></span></li>
+
+                <li><a href="{{ path('app_publicite_showpubge') }}">tous les publicites</a></li>
+
+                <li><span class="fa fa-angle-right"></span></li>
+
+                <li><a href="#">publicite</a></li>
+
+                <li><span class="fa fa-angle-right"></span></li>
+
+                <li><span>Publicite</span></li>
+
+            </ul>
+        </div>
+        <div class="nk-gap-1"></div>
+        <!-- END: Breadcrumbs -->
+
+
+
+
+        <div class="container">
+            <div class="row vertical-gap">
+                <div class="col-lg-12">
+                    <!-- START: Post -->
+                    <div class="nk-blog-post nk-blog-post-single">
+                        <!-- START: Post Text -->
+                        <div class="nk-post-text mt-0">
+                            <div class="nk-post-img">
+                                <img src="{{ asset('uploads/images/'~publicites.image) }}"alt="Grab your sword and fight the Horde">
+                            </div>
+                            <div class="nk-gap-1"></div>
+                            <h1 class="nk-post-title h4">{{ publicites.nom }}</h1>
+                            <div class="nk-post-by">
+                                <img src="{{ asset('assets/images/avatar-2.jpg') }}" alt="Witch Murder" class="rounded-circle" width="35"> by <a href="#">{{publicites.nomProprietaire}}</a> in Sep 5, 2018
+
+
+
+
+
+                            </div>
+                            <div class="nk-gap"></div>
+
+
+                            <div class="nk-gap"></div>
+                            <blockquote class="nk-blockquote">
+                                <div class="nk-blockquote-icon"><span>"</span></div>
+                                <div class="nk-blockquote-content">
+                                    <p>{{ publicites.description }}</p>
+                                </div>
+                                <div class="nk-blockquote-author"><span>{{publicites.nomProprietaire}}</span></div>
+                            </blockquote>
+
+                            <div class="nk-gap"></div>
+
+
+
+                            <div class="nk-gap"></div>
+                            <div style="text-align: center;"> <video controls src="{{ asset('uploads/videos/') ~publicites.video  }}" type="video/mp4" width="700" height="500" </div> video>
+
+                            <div class="nk-gap-2"></div>
+
+                            <div class="nk-gap"></div>
+
+                        </div>
+                        <!-- END: Post Text -->
+<br>
+                   <center>     <button class="nk-btn nk-btn-color-dark-3">J'aime</button></center>
+
+                        <!-- START: Comments -->
+                        <div id="comments"></div>
+                        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">3</span> Comments</span></h3>
+                        <div class="nk-gap"></div>
+                        <div class="nk-comments">
+                            <!-- START: Comment -->
+                            <div class="nk-comment">
+                                <div class="nk-comment-meta">
+                                    <img src="assets/images/avatar-2.jpg" alt="Witch Murder" class="rounded-circle" width="35"> by <a href="#">W{{publicites.nomProprietaire}}</a> {{ publicites.dateDebut ? publicites.dateDebut|date('Y-m-d') : '' }}
+                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right">Reply</a>
+                                </div>
+                                <div class="nk-comment-text">
+                                    <p>This sounded nonsense to Alice, so she said nothing, but set off at once toward the Red Queen. To her surprise, she lost sight of her in a moment, and found herself walking in at the front-door again.</p>
+                                </div>
+
+                                <!-- START: Comment -->
+                                <div class="nk-comment">
+                                    <div class="nk-comment-meta">
+                                        <img src="assets/images/avatar-1.jpg" alt="Hitman" class="rounded-circle" width="35"> by <a href="#">Hitman</a> in 20 September, 2018
+                                        <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right">Reply</a>
+                                    </div>
+                                    <div class="nk-comment-text">
+                                        <p>To her surprise, she lost sight of her in a moment, and found herself walking in at the front-door again.</p>
+                                    </div>
+                                </div>
+                                <!-- END: Comment -->
+                            </div>
+                            <!-- END: Comment -->
+
+                            <!-- START: Comment -->
+                            <div class="nk-comment">
+                                <div class="nk-comment-meta">
+                                    <img src="assets/images/avatar-3.jpg" alt="Wolfenstein" class="rounded-circle" width="35"> by <a href="#">Wolfenstein</a> in 21 September, 2018
+                                    <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right">Reply</a>
+                                </div>
+                                <div class="nk-comment-text">
+                                    <p>The sight of the tumblers restored Bob Sawyer to a degree of equanimity which he had not possessed since his interview with his landlady. His face brightened up, and he began to feel quite convivial.</p>
+                                </div>
+                            </div>
+                            <!-- END: Comment -->
+                        </div>
+                        <!-- END: Comments -->
+
+
+                    </div>
+                    <!-- END: Post -->
+                </div>
+
+            </div>
+        </div>
+
+        <div class="nk-gap-2"></div>
+
+
+
+
+    </div>
+
+
+
+
+
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-top" src="assets/images/bg-top-5.png" alt="">
+    <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+
+    <!-- END: Page Background -->
+
+
+
+
+    <!-- START: Search Modal -->
+    <div class="nk-modal modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="ion-android-close"></span>
+                    </button>
+
+                    <h4 class="mb-0">Search</h4>
+
+                    <div class="nk-gap-1"></div>
+                    <form action="#" class="nk-form nk-form-style-1">
+                        <input type="text" value="" name="search" class="form-control" placeholder="Type something and press Enter" autofocus>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Search Modal -->
+
+
+
+{% endblock %}

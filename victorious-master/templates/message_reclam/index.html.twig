@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MessageReclam index{% endblock %}
+
+{% block body %}
+    <h1>MessageReclam index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdReclam</th>
+                <th>IdSend</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message_reclam in message_reclams %}
+            <tr>
+                <td>{{ message_reclam.id }}</td>
+                <td>{{ message_reclam.idReclam }}</td>
+                <td>{{ message_reclam.idSend }}</td>
+                <td>{{ message_reclam.message }}</td>
+                <td>{{ message_reclam.date ? message_reclam.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_message_reclam_show', {'id': message_reclam.id}) }}">show</a>
+                    <a href="{{ path('app_message_reclam_edit', {'id': message_reclam.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_message_reclam_new') }}">Create new</a>
+{% endblock %}

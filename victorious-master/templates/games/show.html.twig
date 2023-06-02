@@ -1,0 +1,43 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block title %}Games{% endblock %}
+
+{%  block contenpage %}
+    <h1>Games</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdGame</th>
+                <td>{{ game.idGame }}</td>
+            </tr>
+            <tr>
+                <th>GameName</th>
+                <td>{{ game.gameName }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ game.description }}</td>
+            </tr>
+            <tr>
+                <th>News</th>
+                <td>{{ game.news }}</td>
+            </tr>
+            <tr>
+                <th>NewsDate</th>
+                <td>{{ game.newsDate ? game.newsDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ game.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_games_index') }}">back to list</a>
+
+    <a href="{{ path('app_games_edit', {'idGame': game.idGame}) }}">edit</a>
+
+    {{ include('games/_delete_form.html.twig') }}
+{% endblock %}

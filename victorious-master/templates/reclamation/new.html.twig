@@ -1,0 +1,43 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+{% block title %}Ajout Reclamation{% endblock %}
+
+{% block contenpage %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+                                    {{ include('reclamation/_form.html.twig') }}
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+
+
+
+{% endblock %}

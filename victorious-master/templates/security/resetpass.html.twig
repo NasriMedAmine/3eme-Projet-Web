@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container">
+        <h1>
+            mot de passe oublie
+        </h1>
+        {{ form(EmailForm) }}
+    </div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PubliciteAimer{% endblock %}
+
+{% block body %}
+    <h1>PubliciteAimer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdPubAimer</th>
+                <td>{{ publicite_aimer.idPubAimer }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ publicite_aimer.date ? publicite_aimer.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_publicite_aimer_index') }}">back to list</a>
+
+    <a href="{{ path('app_publicite_aimer_edit', {'idPubAimer': publicite_aimer.idPubAimer}) }}">edit</a>
+
+    {{ include('publicite_aimer/_delete_form.html.twig') }}
+{% endblock %}

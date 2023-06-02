@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+
+{% block title %}Réclamation {% endblock %}
+
+    {% block body %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="btn btn-primary" href="{{ path('reclamation_new') }}">Ajouter une réclamation</a>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+                                    <table id="example2"  class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Sujet</th>
+                                            <th>Déscription</th>
+                                            <th>Etat</th>
+                                            <th>Date</th>
+                                            <th>Réponse</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for reclamation in reclamations %}
+                                            <tr>
+                                                <td>{{ reclamation.id }}</td>
+                                                <td>{{ reclamation.sujet }}</td>
+                                                <td>{{ reclamation.description }}</td>
+                                                <td>{{ reclamation.etat }}</td>
+                                                <td>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</td>
+                                                {% if reclamation.etat=='En cours' %}
+                                                    <td> Pas encore</td>
+                                                {% else %}
+                                                    <td> {{reclamation.reponse.text}}</td>
+                                                {% endif %}
+
+                                                <td>
+                                                    {% if reclamation.etat=='En cours' %}
+                                                        <a class="btn btn-danger" href="{{ path('reclamation_ndeleten', {'id': reclamation.id}) }}">Supprimer</a>
+                                                        <a class="btn btn-default" href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">Modifier</a>
+                                                    {% else %}
+                                                        <a class="btn btn-danger" href="{{ path('reclamation_ndeleten', {'id': reclamation.id}) }}">Supprimer</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">Aucune donnée trouvée </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+{% block title %}Reclamation{% endblock %}
+{% block contenpage %}
+    <h1>Reclamation</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ reclamation.id }}</td>
+        </tr>
+        <tr>
+            <th>Sujet</th>
+            <td>{{ reclamation.sujet }}</td>
+        </tr>
+        <tr>
+            <th>Déscription</th>
+            <td>{{ reclamation.description }}</td>
+        </tr>
+        <tr>
+            <th>Etat</th>
+            <td>{{ reclamation.etat }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('reclamation_index') }}">back to list</a>
+
+    <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+
+    {{ include('reclamation/_delete_form.html.twig') }}
+{% endblock %}

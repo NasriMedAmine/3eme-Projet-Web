@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Interditmot{% endblock %}
+
+{% block body %}
+    <h1>Edit Interditmot</h1>
+
+    {{ include('interditmot/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_interditmot_index') }}">back to list</a>
+
+    {{ include('interditmot/_delete_form.html.twig') }}
+{% endblock %}

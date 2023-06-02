@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<script>
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Stat</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <canvas id="myChart" style="max-width:700px"></canvas>
+    <div >
+    <script>
+var xValues = {{nom|raw}};
+var yValues = {{nb|raw}};
+var barColors = [
+  "rgba(255,0,0,1.0)",
+  "rgba(255,0,0,0.8)",
+  "rgba(255,0,0,0.6)",
+  "rgba(255,0,0,0.4)",
+  "rgba(255,0,0,0.2)"
+];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Best winning teams"
+    }
+  }
+});
+</script>
+</div>
+{% endblock %}

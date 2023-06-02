@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Victorious_Mobile">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/victorious-master/Victorious_Mobile/JavaSE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/victorious-master/Victorious_Mobile/CodeNameOneBuildClient.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

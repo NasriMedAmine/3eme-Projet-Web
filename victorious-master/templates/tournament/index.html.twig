@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournament index{% endblock %}
+
+{% block body %}
+    <h1>Tournament index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdTournament</th>
+                <th>TournamentName</th>
+                <th>Managers</th>
+                <th>Team</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tournament in tournaments %}
+            <tr>
+                <td>{{ tournament.idTournament }}</td>
+                <td>{{ tournament.tournamentName }}</td>
+                <td>{{ tournament.managers }}</td>
+                <td>{{ tournament.team }}</td>
+                <td>
+                    <a href="{{ path('app_tournament_show', {'idTournament': tournament.idTournament}) }}">show</a>
+                    <a href="{{ path('app_tournament_edit', {'idTournament': tournament.idTournament}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tournament_new') }}">Create new</a>
+{% endblock %}

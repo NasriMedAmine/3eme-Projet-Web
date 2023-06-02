@@ -1,0 +1,202 @@
+{% extends "base2.html.twig" %}
+
+{% block body %}
+    <!--
+        Additional Classes:
+            .nk-header-opaque
+    -->
+
+
+
+
+
+    <div class="nk-main">
+
+        <div class="nk-gap-2"></div>
+
+
+        <div  data-autoplay="8000">
+
+            <video  id="background-video" autoplay loop muted poster="assets\images\Banner.mp4">
+                <source src="assets\images\Banner.mp4" type="video/mp4">
+            </video>
+
+        </div>
+    </div>
+    <div class="container" id="idDivContainer">
+        <table class="table">
+            <tbody>
+            <tr id="tr1" style="height: 100% ; width:max-content " >
+                <td id="tr1td1" style="height: max-content;width: 50%">
+                <a href="#" onclick="clickAddTournament(this)">
+                    <h3>
+                        Add Tournament
+                    </h3>
+                </a>
+                    <br><br>
+                    <a href="#" onclick="clickCheckTournament(this)" >
+                        <h3>
+                            check my tournaments
+                        </h3>
+                    </a>
+                    
+
+
+
+                </td>
+                <td id="tr1td2" style="height: max-content;width: 50%">
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="nk-gap-4"></div>
+
+
+
+
+
+
+    <!-- START: Page Background -->
+
+    <img class="nk-page-background-top" src="assets/images/bg-top.png" alt="">
+    <img class="nk-page-background-bottom" src="assets/images/bg-bottom.png" alt="">
+
+    <!-- END: Page Background -->
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script>
+
+        var footer = document.querySelector("#idFooter");
+        footer.innerHTML = "";
+
+        function clickAddTournament(){
+
+
+
+            console.log("nzelet saye");
+
+
+
+
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('addTournament') }}",
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+
+                    var tr1Td2 = document.querySelector("#tr1td2");
+
+                    tr1Td2.innerHTML = Response;
+
+
+
+                }
+            });
+
+
+
+        }
+
+        function clickAddTournamentNew(){
+            console.log("nzelet saye aala btn clickAddTournamentNew");
+            var inputname = document.querySelector("#inputname").value;
+            var games = document.querySelector("#games").value;
+            var type = document.querySelector("#type").value;
+            var code = document.querySelector("#code").value;
+
+            $.ajax({
+                method: "GET",
+                url: "{{ path('addTournamentNew') }}",
+                data: {id : localStorage.Id , nameTournament : inputname , codeTournament : code ,type : type , game : games},
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    if(Response == "saye f BD"){
+                        alert("Tournament ajout avec succes");
+                    }
+
+
+
+
+                }
+            });
+
+        }
+
+
+        function clickCheckTournament(){
+            console.log("nzelet saye aala checktournament");
+
+            $.ajax({
+
+                method: "GET",
+                url: "{{ path('CheckTournament') }}",
+                data: {id : localStorage.Id},
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+
+                    var tr1Td2 = document.querySelector("#tr1td2");
+
+                    tr1Td2.innerHTML = Response;
+
+
+
+
+                }
+            });
+
+
+
+        }
+
+        function clickCheckMyTournaments(){
+            console.log("nzelet saye aala clickCheckMyTournaments ");
+            var valueTournament = document.querySelector("#myTournament");
+
+            $.ajax({
+
+                method: "GET",
+                url: "{{ path('CheckTournamentValide') }}",
+                data: {nameTournament : valueTournament.value},
+                success: function(Response){
+                    console.log("saye aamalt requete ajax w jeni response");
+                    console.log(Response);
+                    localStorage.setItem("Tournament",valueTournament.value);
+                    localStorage.setItem("IdTournament",valueTournament.id);
+
+                    var tr1Td2 = document.querySelector("#tr1td2");
+
+                    tr1Td2.innerHTML +="<br><br><br>"
+                    tr1Td2.innerHTML += Response;
+
+
+
+
+                }
+            });
+
+
+
+        }
+
+
+    </script>
+
+{% endblock %}
+

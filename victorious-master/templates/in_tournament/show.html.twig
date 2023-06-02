@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InTournament{% endblock %}
+
+{% block body %}
+    <h1>InTournament</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ in_tournament.id }}</td>
+            </tr>
+            <tr>
+                <th>IdUser</th>
+                <td>{{ in_tournament.idUser }}</td>
+            </tr>
+            <tr>
+                <th>IdTournament</th>
+                <td>{{ in_tournament.idTournament }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_in_tournament_index') }}">back to list</a>
+
+    <a href="{{ path('app_in_tournament_edit', {'id': in_tournament.id}) }}">edit</a>
+
+    {{ include('in_tournament/_delete_form.html.twig') }}
+{% endblock %}

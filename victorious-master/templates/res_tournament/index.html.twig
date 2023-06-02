@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ResTournament index{% endblock %}
+
+{% block body %}
+    <h1>ResTournament index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRes</th>
+                <th>Pseudo</th>
+                <th>Password</th>
+                <th>Mail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for res_tournament in res_tournaments %}
+            <tr>
+                <td>{{ res_tournament.idRes }}</td>
+                <td>{{ res_tournament.pseudo }}</td>
+                <td>{{ res_tournament.password }}</td>
+                <td>{{ res_tournament.mail }}</td>
+                <td>
+                    <a href="{{ path('app_res_tournament_show', {'idRes': res_tournament.idRes}) }}">show</a>
+                    <a href="{{ path('app_res_tournament_edit', {'idRes': res_tournament.idRes}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_res_tournament_new') }}">Create new</a>
+{% endblock %}

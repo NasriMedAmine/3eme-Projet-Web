@@ -1,0 +1,24 @@
+<label for="name">
+    name tournament
+</label>
+
+<select name="myTournament" id="myTournament">
+    <option value="">--Please choose My Tournaments--</option>
+    {% for MyTournament in MyTournaments %}
+
+        <option name="{{ MyTournament.IdTournament }}" value="{{ MyTournament.tournamentName }}">{{ MyTournament.tournamentName }}</option>
+    {% endfor %}
+</select><br><br><br><br>
+
+
+
+<div style="text-align: center;">
+    <button id="btnAddTournament" onclick="clickCheckMyTournaments(this)" style="width: 100px">
+        Check
+    </button>
+</div>
+
+
+
+
+

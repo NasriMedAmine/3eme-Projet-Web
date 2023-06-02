@@ -1,0 +1,145 @@
+{% extends "admin/bars.html.twig" %}
+
+{% block javascripts %}
+<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js
+"></script>
+<?php include("data.php") ?>
+<script type="text/javascript">
+    function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("scc").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET","data.php", true);
+  xhttp.send();
+}
+</script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+<?php
+    $sql="SELECT * FROM `noti` ";
+$result=mysqli_query($con,$sql);
+?>
+
+{% endblock %}
+
+{% block contenpage %}
+
+
+    <h1>Teams</h1>
+
+     <h6>Joining notification :       <a href="{{ path('app_backnot_index') }}"><i id="scc" class="fa fa-bell" aria-hidden="true" >{{notification}}</i></a></h6>
+   
+    <h2>Search teams!</h2>
+
+
+
+    <div class="input-group custom-search-form">
+        <div class="input-group">
+            <input id="myInput" type="text" placeholder="Search.." class="form-control">
+            <br><br>
+        </div>
+    </div>
+    <!-- /input-group -->
+
+    <div id="all">
+
+    </div>
+
+
+    <ul class="nav navbar-right panel_toolbox">
+        <li>
+            <a href="{{ path('app_back_new') }}" class="btn btn-success">NEW</a>
+        </li>
+    </ul>
+    <form method="post" action="{{path('trie')}}">
+    
+    <input type="submit" value="Trie par Team name">
+</form>
+<form method="post" action="{{path('trieplayer')}}">
+    
+    <input type="submit" value="Trie par Player name">
+</form>
+    <table id="myTable" class="display table table-striped table-bordered dataminetables">
+        <thead>
+            <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+        <tr>
+
+
+            <th>Id</th>
+            <th>Team Name</th>
+            <th>Logo</th>
+            <th>nb Players</th>
+            <th>Players</th>
+            <th>Favorite Games</th>
+            <th>Team Desciption</th>
+            <th>Password</th>
+        
+            <th>Team Mail</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+          
+    
+            <!-- Flashy depends on jQuery -->
+            <script src="//code.jquery.com/jquery.js"></script>
+            <!-- Load Flashy default JavaScript -->
+            <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+            <!-- Include Flashy default partial -->
+            {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+        {% for team in teams %}
+
+            <tr>
+                <td><br> <br> <br> <center> <p>{{ team.idTeam }}</p></center></td>
+                <td><br> <br> <br> <center> <p>{{ team.teamName }}</p></center></td>
+                <td> <img class="-google-plus-circle" src="{{ asset('assets/images/') ~team.logo }}"alt="publicite" width="192" height="140" >  </td>
+
+                </td>
+                <td><br> <br> <br> <center> <p>{{ team.nbPlayers }}</p></center></td>
+                <td><br> <br> <br> <center> <p>{{ team.players }}</p></center></td>
+
+                <td><br> <br> <br> <center> <p>{{ team.favoriteGames }}</p></center></td>
+                <td><br> <br> <br> <center><p>{{ team.teamDesciption }}</p></center></td>
+                <td> <p>{{ team.password }}</p></td>
+
+
+                <td><br> <br> <br> <center> <p>{{ team.teamMail }}</p></center>
+                  
+                     </td>
+                <iframe id="invisible" style="display:none;"></iframe>
+                <td><a href="{{ path('app_back_delete',{'idTeam':team.idTeam })}}">Delete</a></td>
+                <td><a href="{{ path('app_back_edit',{'idTeam':team.idTeam })}}">Update</a></td>
+                
+
+
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+<h5>  {{ knp_pagination_render(teams) }}</h5>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leader index{% endblock %}
+
+{% block body %}
+    <h1>Leader index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdLeader</th>
+                <th>Level</th>
+                <th>Pseudo</th>
+                <th>Password</th>
+                <th>Mail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for leader in leaders %}
+            <tr>
+                <td>{{ leader.idLeader }}</td>
+                <td>{{ leader.level }}</td>
+                <td>{{ leader.pseudo }}</td>
+                <td>{{ leader.password }}</td>
+                <td>{{ leader.mail }}</td>
+                <td>
+                    <a href="{{ path('app_leader_show', {'id': leader.idLeader}) }}">show</a>
+                    <a href="{{ path('app_leader_edit', {'id': leader.idLeader}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_leader_new') }}">Create new</a>
+{% endblock %}

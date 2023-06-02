@@ -1,0 +1,94 @@
+{% extends "admin/bars.html.twig" %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}">
+    </script>
+
+{% endblock %}
+{% block title %}Reclamation {% endblock %}
+
+{% block contenpage %}
+    <h2>Search Reclamation!</h2>
+
+    <input id="myInput" type="text" placeholder="Search.." class="form-control">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
+
+"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <section class="content">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+                                    <table id="myTable" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Sujet</th>
+                                            <th>Description</th>
+                                            <th>Etat</th>
+                                            <th>Date</th>
+                                            <th>User</th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for reclamation in reclamations %}
+                                            <tr>
+                                                <td>{{ reclamation.id }}</td>
+                                                <td>{{ reclamation.sujet }}</td>
+                                                <td>{{ reclamation.description }}</td>
+                                                <td>{{ reclamation.etat }}</td>
+                                                <td>{{ reclamation.date ? reclamation.date|date('Y-m-d H:i:s') : '' }}</td>
+                                                <td>{{ reclamation.user.pseudo }}</td>
+                                                <td>
+                                                    {% if reclamation.etat=='En cours' %}
+                                                        <a class="btn btn-danger" href="{{ path('reclamation_traiter', {'id': reclamation.id}) }}">Traiter</a>
+
+                                                    {% else %}
+                                                        <a class="btn btn-warning" href="">Reclamation Traitée</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+
+
+
+{% endblock %}

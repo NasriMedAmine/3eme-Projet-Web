@@ -1,0 +1,36 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        user_images:
+            uri_prefix: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\users'
+            upload_destination: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\users'
+            namer: 'Vich\UploaderBundle\Naming\UniqidNamer'
+            #inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        team_images:
+            uri_prefix: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\teams'
+            upload_destination: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\teams'
+            namer: 'Vich\UploaderBundle\Naming\UniqidNamer'
+            #inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        news_images:
+            uri_prefix: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\news'
+            upload_destination: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\news'
+            namer: 'Vich\UploaderBundle\Naming\UniqidNamer'
+            #inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+        games_images:
+            uri_prefix: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\games'
+            upload_destination: 'C:\Users\NasriAmine\OneDrive\Bureau\integration Web\amin nchalh lekher\victorious-master\public\uploads\images\games'
+            namer: 'Vich\UploaderBundle\Naming\UniqidNamer'
+            #inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+ 
+             
+       

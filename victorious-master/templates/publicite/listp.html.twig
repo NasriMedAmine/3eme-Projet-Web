@@ -1,0 +1,63 @@
+
+
+{% block contenpage %}
+<h1 align ='center'>liste Publicites</h1>
+
+
+
+
+    <br> <br> <br>
+
+
+
+
+
+
+    <table id="example" class="display table table-striped table-bordered dataminetables">
+        <thead>
+        <tr>
+
+
+
+            <th>Nom</th>
+
+            <th>DateDebut</th>
+            <th>DateFin</th>
+            <th>NomProprietaire</th>
+            <th>Prix</th>
+            <th>Description</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for publicite in publicites %}
+
+            <tr>
+
+                <td><br> <br> <br> <center> <p>{{ publicite.nom }}</p></center></td>
+
+
+                </td>
+                <td><br> <br> <br> <center> <p>{{ publicite.dateDebut ? publicite.dateDebut|date('Y-m-d') : '' }}</p></center></td>
+                <td><br> <br> <br> <center> <p>{{ publicite.dateFin ? publicite.dateFin|date('Y-m-d') : '' }}</p></center></td>
+
+                <td><br> <br> <br> <center> <p>{{ publicite.nomProprietaire }}</p></center></td>
+                <td><br> <br> <br> <center><p>{{ publicite.prix }} dt</p></center></td>
+                <td> <p>{{ publicite.description }}</p></td>
+
+
+
+
+
+
+              </tr>
+
+
+            <hr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

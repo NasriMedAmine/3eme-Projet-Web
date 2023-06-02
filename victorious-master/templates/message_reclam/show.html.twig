@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MessageReclam{% endblock %}
+
+{% block body %}
+    <h1>MessageReclam</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ message_reclam.id }}</td>
+            </tr>
+            <tr>
+                <th>IdReclam</th>
+                <td>{{ message_reclam.idReclam }}</td>
+            </tr>
+            <tr>
+                <th>IdSend</th>
+                <td>{{ message_reclam.idSend }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ message_reclam.message }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ message_reclam.date ? message_reclam.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_message_reclam_index') }}">back to list</a>
+
+    <a href="{{ path('app_message_reclam_edit', {'id': message_reclam.id}) }}">edit</a>
+
+    {{ include('message_reclam/_delete_form.html.twig') }}
+{% endblock %}
